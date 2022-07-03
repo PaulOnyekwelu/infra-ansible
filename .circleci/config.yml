@@ -5,21 +5,21 @@ docker_default: &docker_default
     - image: amazon/aws-cli
 
 commands:
-  print_hello:
+  run_create_infra:
     steps:
       - checkout
       - run:
-          name: "printing hello world"
-          command: "echo $AWS_ACCESS_KEY_ID"
+          name: "Creating AWS Infrastructure..."
+          command: "./../cloudformation/create-infra.sh"
 
 jobs:
   create_infra:
     <<: *docker_default
     steps:
       - checkout
-      - print_hello
+      - run_create_infra
 
 workflows:
-  say-hello-workflow:
+  continuous_deployment:
     jobs:
       - create_infra

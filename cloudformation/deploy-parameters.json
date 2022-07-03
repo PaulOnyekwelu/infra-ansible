@@ -1,0 +1,8 @@
+[
+  "EnvironmentName=Infra-Ansible",
+  "MyVPCID=vpc-0cf935d13e4ca9cd4",
+  "ImageID=ami-0ddf424f81ddb0720",
+  "KeyName=ansible-cicd-uswest2",
+  "SubnetID=subnet-041a4672558fd646b",
+  "InstanceType=t2.medium"
+]
