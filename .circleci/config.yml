@@ -10,7 +10,7 @@ commands:
       - checkout
       - run:
           name: "printing hello world"
-          command: "print  $AWS_ACCESS_KEY_ID"
+          command: "echo $AWS_ACCESS_KEY_ID"
 
 jobs:
   create_infra:
