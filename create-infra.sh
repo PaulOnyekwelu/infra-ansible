@@ -10,8 +10,8 @@
 # for aws cloudformation deploy
 aws cloudformation deploy \
   --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
-  --template-file ~/cloudformation/infra.yml \
-  --parameter-overrides file://"~/cloudformation/deploy-parameters.json" \
+  --template-file "./cloudformation/infra.yml" \
+  --parameter-overrides file://"./cloudformation/deploy-parameters.json" \
   --region=us-west-2
 
   
