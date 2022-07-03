@@ -1,0 +1,63 @@
+Parameters:
+  EnvironmentName:
+    Description: Environment name
+    Type: String
+  MyVPCID:
+    Description: a reference to default vpc id for us-west-2 region
+    Type: String
+  ImageID:
+    Description: an AWS image id
+    Type: String
+  KeyName:
+    Description: keypair name
+    Type: String
+  SubnetID:
+    Description: US west 2 a subnet id
+    Type: String
+  InstanceType:
+    Description: referecnce to instance Type
+    Type: String
+
+Resources:
+  SecGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow http and ssh to client host
+      VpcId: !Ref MyVPCID
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+        - IpProtocol: tcp
+          FromPort: 0
+          ToPort: 65535
+          CidrIp: 0.0.0.0/0
+
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref ImageID
+      KeyName: !Ref KeyName
+      InstanceType: !Ref InstanceType
+      NetworkInterfaces:
+        - AssociatePublicIpAddress: true
+          DeviceIndex: "0"
+          GroupSet:
+            - !Ref SecGroup
+          SubnetId: !Ref SubnetID
+      BlockDeviceMappings:
+        - DeviceName: /dev/sdk
+          Ebs:
+            VolumeSize: 10
+            VolumeType: gp3
+        - DeviceName: "/dev/sdk"
+          NoDevice: {}
+      Tags:
+        - Key: Name
+          Value: !Sub ${EnvironmentName}-EC2Instance

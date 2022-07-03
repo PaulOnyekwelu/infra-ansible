@@ -1,0 +1,5 @@
+ansible-cicd-uswest2.pem
+__pycache__
+venv
+.env
+*.db

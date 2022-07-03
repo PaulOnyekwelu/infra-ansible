@@ -1,0 +1,26 @@
+[
+  {
+    "ParameterKey": "EnvironmentName",
+    "ParameterValue": "Infra-Ansible"
+  },
+  {
+    "ParameterKey": "MyVPCID",
+    "ParameterValue": "vpc-0cf935d13e4ca9cd4"
+  },
+  {
+    "ParameterKey": "ImageID",
+    "ParameterValue": "ami-0ddf424f81ddb0720"
+  },
+  {
+    "ParameterKey": "KeyName",
+    "ParameterValue": "ansible-cicd-uswest2"
+  },
+  {
+    "ParameterKey": "SubnetID",
+    "ParameterValue": "subnet-041a4672558fd646b"
+  },
+  {
+    "ParameterKey": "InstanceType",
+    "ParameterValue": "t2.medium"
+  }
+]
