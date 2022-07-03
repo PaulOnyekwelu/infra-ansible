@@ -13,5 +13,3 @@ aws cloudformation deploy \
   --template-file "./cloudformation/infra.yml" \
   --parameter-overrides file://"./cloudformation/deploy-parameters.json" \
   --region=us-west-2
-
-  
