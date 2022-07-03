@@ -10,8 +10,7 @@ commands:
       - checkout
       - run:
           name: "Creating AWS Infrastructure..."
-          # command: "../cloudformation/create-infra.sh"
-          command: "ls -al"
+          command: "/root/project/cloudformation/create-infra.sh"
 
 jobs:
   create_infra:
