@@ -11,7 +11,7 @@ commands:
       - run:
           name: "Creating AWS Infrastructure..."
           # command: "../cloudformation/create-infra.sh"
-          command: "pwd"
+          command: "ls -al"
 
 jobs:
   create_infra:
