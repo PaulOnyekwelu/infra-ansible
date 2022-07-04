@@ -27,7 +27,7 @@
 #     dest: "~/bookmarks-api"
 - name: copy project to directory
   shell: |
-    cp -r files/ ~/bookmarks-api
+    cp ~/roles/setup/files/* ~/bookmarks-api
 - name: install project dependencies
   shell: |
     cd ~/bookmarks-api
