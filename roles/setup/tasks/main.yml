@@ -32,11 +32,11 @@
     owner: ubuntu
     group: ubuntu
 - name: install project dependencies
-  script: |
+  shell: |
     cd ~/bookmarks-api
     pip3 install -r requirements.txt
 
 - name: start flask server
-  script: |
+  shell: |
     echo "starting flask server..."
     flask run
