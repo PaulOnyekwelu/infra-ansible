@@ -23,7 +23,7 @@
     state: directory
 - name: copy project to directory
   template:
-    src: "./files/"
+    src: "files/"
     dest: "~/bookmarks-api"
 - name: install project dependencies
   shell: |
