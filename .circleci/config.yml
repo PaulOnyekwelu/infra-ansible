@@ -12,7 +12,7 @@ commands:
     steps:
       - run:
           name: "Creating AWS Infrastructure..."
-          command: "./script/create-infra.sh"
+          command: "./scripts/create-infra.sh"
   get_ec2_pub_addr:
     steps:
       - run:
