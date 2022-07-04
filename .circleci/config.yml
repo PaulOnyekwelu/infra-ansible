@@ -43,14 +43,15 @@ jobs:
       - save_cache:
           name: persisting inventory file
           key: inventory_cache
-          paths: 
+          paths:
             - ./inventory
   configure_infra:
     <<: *docker_ansible
     steps:
       - checkout
       - add_ssh_keys:
-          fingerprints: [$SSH_KEY_ID]
+          fingerprints:
+            - $SSH_KEY_ID
       - install_ansible
       - restore_cache:
           name: restoring inventory file
