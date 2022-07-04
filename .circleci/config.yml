@@ -1,6 +1,6 @@
 version: 2.1
 
-docker_default: &docker_default
+docker_infra: &docker_infra
   docker:
     - image: amazon/aws-cli
 
@@ -14,7 +14,7 @@ commands:
 
 jobs:
   create_infra:
-    <<: *docker_default
+    <<: *docker_infra
     steps:
       - checkout
       - run_create_infra
@@ -22,4 +22,5 @@ jobs:
 workflows:
   continuous_deployment:
     jobs:
-      - create_infra
+      - create_infra:
+          type: approval
