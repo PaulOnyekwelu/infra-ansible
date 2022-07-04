@@ -38,5 +38,8 @@
 
 - name: start flask server
   shell: |
+    ls -al
+    export FLASK_ENV=development
+    export FLASK_APP=~/bookmarks-api/src
     echo "starting flask server..."
     flask run
