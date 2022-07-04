@@ -77,4 +77,4 @@ workflows:
       # - configure_infra:
           # requires:
           #   - populate_inventory
-      - configure_infra:
+      - configure_infra
