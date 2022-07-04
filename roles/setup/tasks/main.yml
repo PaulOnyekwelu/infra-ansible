@@ -21,10 +21,13 @@
   file:
     path: ~/bookmarks-api
     state: directory
+# - name: copy project to directory
+#   template:
+#     src: "files/"
+#     dest: "~/bookmarks-api"
 - name: copy project to directory
-  template:
-    src: "files/"
-    dest: "~/bookmarks-api"
+  shell: |
+    cp -r files/ ~/bookmarks-api
 - name: install project dependencies
   shell: |
     cd ~/bookmarks-api
