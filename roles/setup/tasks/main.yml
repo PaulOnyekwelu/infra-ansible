@@ -27,13 +27,16 @@
 #     dest: "~/bookmarks-api"
 - name: copy project to directory
   copy:
-      src: ../files/
-      dest: ~/bookmarks-api
-      owner: ubuntu
-      group: ubuntu
+    src: ../files/
+    dest: ~/bookmarks-api
+    owner: ubuntu
+    group: ubuntu
 - name: install project dependencies
-  shell: |
+  script: |
     cd ~/bookmarks-api
     pip3 install -r requirements.txt
+
+- name: start flask server
+  script: |
     echo "starting flask server..."
     flask run
