@@ -40,6 +40,10 @@ jobs:
     steps:
       - checkout
       - get_ec2_pub_addr
+      - save_cache:
+          name: persisting inventory file
+          key: inventory_cache
+          value: ./inventory
   configure_infra:
     <<: *docker_ansible
     steps:
@@ -47,6 +51,10 @@ jobs:
       - add_ssh_keys:
           fingerprints: [$SSH_KEY_ID]
       - install_ansible
+      - restore_cache:
+          name: restoring inventory file
+          keys:
+            - inventory_cache
       - run_ansible_playbook
 
 workflows:
