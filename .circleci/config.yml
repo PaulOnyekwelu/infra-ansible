@@ -57,13 +57,14 @@ jobs:
     <<: *docker_ansible
     steps:
       - checkout
-      - add_ssh_keys:
-          fingerprints: ["2e:67:62:ae:93:9a:4e:5f:c0:2a:22:fe:45:1a:95:e4"]
-      - install_ansible
       - restore_cache:
           name: restoring inventory file
           keys:
             - inventory_cache
+      - add_ssh_keys:
+          fingerprints: ["2e:67:62:ae:93:9a:4e:5f:c0:2a:22:fe:45:1a:95:e4"]
+      - run: cat ./inventory
+      - install_ansible
       - run_ansible_playbook
 
 workflows:
