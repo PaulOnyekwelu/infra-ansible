@@ -1,0 +1,34 @@
+---
+- name: update apt packages
+  become: true
+  apt:
+    update_cache: true
+- name: upgrade apt packages
+  become: true
+  apt:
+    upgrade: true
+- name: remove dependencies that are no longer required
+  become: true
+  apt:
+    autoremove: true
+- name: install python and pip
+  become: true
+  apt:
+    name: python3
+    state: latest
+    update_cache: true
+- name: create app dir
+  file:
+    path: ~/bookmarks-api
+    state: directory
+- name: copy project to directory
+  template:
+    src: "files/*"
+    dest: "~/bookmarks-api"
+- name: install project dependencies
+  shell: |
+    python3 -m venv venv
+    source ./venv/bin/activate
+    pip3 install -r requirements.txt
+    echo "starting flask server..."
+    flask run

@@ -3,14 +3,31 @@ version: 2.1
 docker_infra: &docker_infra
   docker:
     - image: amazon/aws-cli
+docker_ansible: &docker_ansible
+  docker:
+    - image: python:3.7-alpine3.11
 
 commands:
   run_create_infra:
     steps:
-      - checkout
       - run:
           name: "Creating AWS Infrastructure..."
-          command: "./cloudformation/create-infra.sh"
+          command: "./script/create-infra.sh"
+  get_ec2_pub_addr:
+    steps:
+      - run:
+          name: "Get EC2 instances public addresses"
+          command: "./scripts/getPubAddr.sh"
+  install_ansible:
+    steps:
+      - run:
+          name: "install Ansible"
+          command: "apk add --update ansible"
+  run_ansible_playbook:
+    steps:
+      - run:
+          name: "Run ansible playbook and configure server"
+          command: "ansible-playbook ./ansible-main.yml -i ./inventory"
 
 jobs:
   create_infra:
@@ -18,9 +35,27 @@ jobs:
     steps:
       - checkout
       - run_create_infra
+  populate_inventory:
+    <<: *docker_infra
+    steps:
+      - checkout
+      - get_ec2_pub_addr
+  configure_infra:
+    <<: *docker_ansible
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints: [$SSH_KEY_ID]
+      - install_ansible
+      - run_ansible_playbook
 
 workflows:
   continuous_deployment:
     jobs:
-      - create_infra:
-          type: approval
+      - create_infra
+      - populate_inventory:
+          requires:
+            - create_infra
+      - configure_infra:
+          requires:
+            - populate_inventory

@@ -61,3 +61,5 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub ${EnvironmentName}-EC2Instance
+        - Key: Project
+          Value: Ansible
