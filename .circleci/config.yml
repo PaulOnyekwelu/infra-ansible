@@ -28,13 +28,20 @@ commands:
       - run:
           name: "Run ansible playbook and configure server"
           command: "ansible-playbook ./ansible-main.yml -i ./inventory"
+  destroy_infra:
+    steps:
+      - run:
+          name: Destroy environment
+          when: on_fail
+          command: |
+            aws cloudformation delete-stack --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5}
 
 jobs:
-  create_infra:
-    <<: *docker_infra
-    steps:
-      - checkout
-      - run_create_infra
+  # create_infra:
+  #   <<: *docker_infra
+  #   steps:
+  #     - checkout
+  #     - run_create_infra
   populate_inventory:
     <<: *docker_infra
     steps:
@@ -43,32 +50,30 @@ jobs:
       - save_cache:
           name: persisting inventory file
           key: inventory_cache
-          paths: 
+          paths:
             - ./inventory
   configure_infra:
     <<: *docker_ansible
     steps:
       - checkout
       - add_ssh_keys:
-          fingerprints: 
+          fingerprints:
             - $FINGERPRINT
       - install_ansible
-      - run:
-          name: print fingerprint
-          command: echo "fingerprint:\ $FINGERPRINT"
       - restore_cache:
           name: restoring inventory file
           keys:
             - inventory_cache
       - run_ansible_playbook
+      - destroy_infra
 
 workflows:
   continuous_deployment:
     jobs:
-      - create_infra
-      - populate_inventory:
-          requires:
-            - create_infra
+      # - create_infra
+      - populate_inventory
+        # requires:
+        #   - create_infra
       - configure_infra:
           requires:
             - populate_inventory
