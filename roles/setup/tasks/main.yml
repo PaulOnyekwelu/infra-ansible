@@ -27,7 +27,7 @@
 #     dest: "~/bookmarks-api"
 - name: copy project to directory
   copy:
-      remote_src: ./roles/setup/files/
+      src: ../files/
       dest: ~/bookmarks-api
       owner: ubuntu
       group: ubuntu
