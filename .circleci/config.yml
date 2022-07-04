@@ -70,7 +70,7 @@ workflows:
   continuous_deployment:
     jobs:
       - create_infra
-      - populate_inventory
+      - populate_inventory:
           requires:
             - create_infra
       - configure_infra:
