@@ -18,6 +18,7 @@
     state: latest
     update_cache: true
 - name: create app dir
+  become: true
   file:
     path: ~/bookmarks-api
     state: directory
@@ -26,20 +27,22 @@
 #     src: "files/"
 #     dest: "~/bookmarks-api"
 - name: copy project to directory
+  become: true
   copy:
     src: ../files/
-    dest: ~/bookmarks-api
+    dest: /home/ubuntu/bookmarks-api
     owner: ubuntu
     group: ubuntu
 - name: install project dependencies
   shell: |
-    cd ~/bookmarks-api
+    cd /home/ubuntu/bookmarks-api
     pip3 install -r requirements.txt
 
 - name: start flask server
+  become: true
   shell: |
     ls -al
     export FLASK_ENV=development
-    export FLASK_APP=~/bookmarks-api/src
+    export FLASK_APP=/home/ubuntu/bookmarks-api
     echo "starting flask server..."
     flask run
