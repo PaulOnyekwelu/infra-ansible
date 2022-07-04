@@ -43,7 +43,8 @@ jobs:
       - save_cache:
           name: persisting inventory file
           key: inventory_cache
-          value: ./inventory
+          paths: 
+            - ./inventory
   configure_infra:
     <<: *docker_ansible
     steps:
