@@ -57,10 +57,10 @@ jobs:
     <<: *docker_ansible
     steps:
       - checkout
-      - restore_cache:
-          name: restoring inventory file
-          keys:
-            - inventory_cache
+      # - restore_cache:
+      #     name: restoring inventory file
+      #     keys:
+      #       - inventory_cache
       - add_ssh_keys:
           fingerprints: ["2e:67:62:ae:93:9a:4e:5f:c0:2a:22:fe:45:1a:95:e4"]
       - run: cat ./inventory
@@ -70,10 +70,10 @@ jobs:
 workflows:
   continuous_deployment:
     jobs:
-      - create_infra
-      - populate_inventory:
-          requires:
-            - create_infra
+      # - create_infra
+      # - populate_inventory:
+      #     requires:
+      #       - create_infra
       - configure_infra:
           requires:
             - populate_inventory
