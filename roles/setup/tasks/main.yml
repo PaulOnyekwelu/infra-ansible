@@ -39,6 +39,6 @@
 - name: start flask server
   shell: |
     ls -al
-    export FLASK_APP=/home/ubuntu/bookmarks-api/src
+    export FLASK_APP=src
     echo "starting flask server..."
     flask run
