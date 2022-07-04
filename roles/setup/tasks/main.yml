@@ -26,8 +26,11 @@
 #     src: "files/"
 #     dest: "~/bookmarks-api"
 - name: copy project to directory
-  shell: |
-    cp ~/roles/setup/files/* ~/bookmarks-api
+  copy:
+      src: ./roles/setup/files/*
+      dest: ~/bookmarks-api
+      owner: ubuntu
+      group: ubuntu
 - name: install project dependencies
   shell: |
     cd ~/bookmarks-api
