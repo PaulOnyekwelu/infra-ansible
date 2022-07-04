@@ -23,10 +23,11 @@
     state: directory
 - name: copy project to directory
   template:
-    src: "files/*"
+    src: "./files/"
     dest: "~/bookmarks-api"
 - name: install project dependencies
   shell: |
+    cd ~/bookmarks-api
     python3 -m venv venv
     source ./venv/bin/activate
     pip3 install -r requirements.txt
