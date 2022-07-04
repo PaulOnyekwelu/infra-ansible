@@ -65,15 +65,14 @@ jobs:
           keys:
             - inventory_cache
       - run_ansible_playbook
-      - destroy_infra
 
 workflows:
   continuous_deployment:
     jobs:
       - create_infra
       - populate_inventory
-        requires:
-          - create_infra
+          requires:
+            - create_infra
       - configure_infra:
           requires:
             - populate_inventory
