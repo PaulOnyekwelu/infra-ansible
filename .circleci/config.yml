@@ -49,7 +49,7 @@ commands:
       - run:
           name: Smoke test
           command: |
-            URL="http://google.com/"
+            URL="http://google444.com/"
             if curl -s --head ${URL}
             then
               return 0
