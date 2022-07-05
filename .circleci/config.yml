@@ -41,6 +41,12 @@ commands:
   run_smoke_test:
     steps:
       - run:
+          name: installing curl
+          command: |
+            apk update
+            apk upgrade
+            apk --no-cache add curl
+      - run:
           name: Smoke test
           command: |
             URL="http://google.com/"
